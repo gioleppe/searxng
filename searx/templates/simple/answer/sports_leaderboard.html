@@ -1,0 +1,30 @@
+<div class="sports-leaderboard">
+  <h4 class="sports-leaderboard-title">{{ answer.league }} &mdash; {{ answer.season }}</h4>
+  <div class="sports-leaderboard-table-wrapper">
+    <table class="sports-leaderboard-table">
+      <thead>
+        <tr>
+          {%- for header in answer.headers -%}
+            <th>{{ header }}</th>
+          {%- endfor -%}
+        </tr>
+      </thead>
+      <tbody>
+        {%- for row in answer.rows -%}
+          <tr>
+            {%- for cell in row -%}
+              <td>{{ cell }}</td>
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+</div>
+{%- if answer.url -%}
+  <a href="{{ answer.url }}" class="answer-url"
+     {%- if results_on_new_tab %} target="_blank" rel="noopener noreferrer"
+     {%- else -%} rel="noreferrer"
+     {%- endif -%}
+     >Wikipedia</a>
+{%- endif -%}

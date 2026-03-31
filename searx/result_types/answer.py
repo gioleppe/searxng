@@ -22,6 +22,10 @@ template.
    :members:
    :show-inheritance:
 
+.. autoclass:: SportsLeaderboard
+   :members:
+   :show-inheritance:
+
 .. autoclass:: AnswerSet
    :members:
    :show-inheritance:
@@ -29,7 +33,7 @@ template.
 # pylint: disable=too-few-public-methods
 
 
-__all__ = ["AnswerSet", "Answer", "Translations", "WeatherAnswer"]
+__all__ = ["AnswerSet", "Answer", "Translations", "WeatherAnswer", "SportsLeaderboard"]
 
 from flask_babel import gettext
 import msgspec
@@ -235,3 +239,41 @@ class WeatherAnswer(BaseAnswer, kw_only=True):
                https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data
             """
             return weather.symbol_url(self.condition)
+
+
+class SportsLeaderboard(BaseAnswer, kw_only=True):
+    """Answer type for sports league standings / leaderboards.
+
+    The standings are stored as a generic table (headers + rows) so that the
+    same type can be used for any sport (football, basketball, …).
+
+    .. code:: python
+
+       SportsLeaderboard(
+           league="Premier League",
+           season="2024-25",
+           headers=["Pos", "Club", "Pld", "W", "D", "L", "GF", "GA", "GD", "Pts"],
+           rows=[["1", "Liverpool", "20", "15", "4", "1", "45", "15", "+30", "49"], ...],
+           url="https://en.wikipedia.org/wiki/2024-25_Premier_League",
+       )
+
+    """
+
+    template: str = "answer/sports_leaderboard.html"
+    """Template located at :origin:`answer/sports_leaderboard.html
+    <searx/templates/simple/answer/sports_leaderboard.html>`"""
+
+    league: str
+    """Human-readable league name (e.g. ``"Premier League"``)."""
+
+    season: str
+    """Season identifier (e.g. ``"2024-25"`` or ``"2024"``)."""
+
+    headers: list[str]
+    """Column headers extracted from the Wikipedia standings table."""
+
+    rows: list[list[str]]
+    """Standings rows; each row is a list of strings matching *headers*."""
+
+    def __hash__(self):
+        return hash(self.league + self.season)

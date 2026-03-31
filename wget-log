@@ -1,0 +1,8 @@
+--2026-03-31 21:28:31--  https://go.dev/dl/go1.24.5.linux-amd64.tar.gz
+Resolving go.dev (go.dev)... 216.239.38.21, 216.239.32.21, 216.239.34.21, ...
+Connecting to go.dev (go.dev)|216.239.38.21|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://dl.google.com/go/go1.24.5.linux-amd64.tar.gz [following]
+--2026-03-31 21:28:31--  https://dl.google.com/go/go1.24.5.linux-amd64.tar.gz
+Resolving dl.google.com (dl.google.com)... failed: No address associated with hostname.
+wget: unable to resolve host address ‘dl.google.com’

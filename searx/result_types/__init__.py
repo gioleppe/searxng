@@ -21,6 +21,7 @@ __all__ = [
     "Answer",
     "Translations",
     "WeatherAnswer",
+    "SportsLeaderboard",
     "Code",
     "Paper",
     "File",
@@ -30,7 +31,7 @@ import typing as t
 import abc
 
 from ._base import Result, MainResult, LegacyResult
-from .answer import AnswerSet, Answer, Translations, WeatherAnswer
+from .answer import AnswerSet, Answer, Translations, WeatherAnswer, SportsLeaderboard
 from .keyvalue import KeyValue
 from .code import Code
 from .paper import Paper
@@ -54,6 +55,7 @@ class ResultList(list[Result | LegacyResult], abc.ABC):
         Result = Result
         Translations = Translations
         WeatherAnswer = WeatherAnswer
+        SportsLeaderboard = SportsLeaderboard
 
         # for backward compatibility
         LegacyResult = LegacyResult

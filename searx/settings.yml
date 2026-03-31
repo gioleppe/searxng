@@ -250,6 +250,9 @@ plugins:
   searx.plugins.tracker_url_remover.SXNGPlugin:
     active: true
 
+  searx.plugins.sports_leaderboard.SXNGPlugin:
+    active: true
+
 
 # Configuration of the "Hostnames plugin":
 #
